@@ -15,6 +15,7 @@ export function getStyleElement(): HTMLStyleElement {
 
 function createStyleElement(): HTMLStyleElement {
   const styleElement = document.createElement("style");
+  styleElement.setAttribute("data-ms", "1");
   const head = document.head!;
 
   styleElement.type = "text/css";

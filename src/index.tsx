@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { initializeIcons, Icon, FocusZone } from "office-ui-fabric-react";
-import { ThemeProvider, styled } from "./newStyled/index";
+import { ThemeProvider, styled, parseStyles } from "./newStyled/index";
 import { LightTheme, DarkTheme } from "./theme";
 import * as ThemeVariables from "./themeVariables";
 import * as Fonts from "./fonts";
@@ -10,6 +10,7 @@ import { NoWrapStyle } from "./commonStyles";
 import "./styles.css";
 
 initializeIcons();
+parseStyles();
 
 const AppFrame = styled.div`
   ${props => props.theme.default}
