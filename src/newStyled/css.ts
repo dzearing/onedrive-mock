@@ -49,13 +49,7 @@ function _insertRule(selector, name, value) {
   const style = getStyleElement();
   const rule = `${selector}{${name}:${value};}`;
 
-  if (!_id) {
-    _id = setTimeout(() => {
-      _id = 0;
-      console.log(_rules);
-    }, 500);
-  }
-  style.sheet.insertRule(rule);
+  (style.sheet as any).insertRule(rule);
 }
 
 const Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

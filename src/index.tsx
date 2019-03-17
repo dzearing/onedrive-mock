@@ -10,7 +10,6 @@ import { NoWrapStyle } from "./commonStyles";
 import "./styles.css";
 
 initializeIcons();
-console.clear();
 
 const AppFrame = styled.div`
   ${props => props.theme.default}
@@ -188,7 +187,7 @@ const FolderTitle = styled.div`
 `;
 
 const FolderDate = styled.div`
-  ${NoWrapStyle}  
+  ${NoWrapStyle}
   font-size: 12px;
   color: var(${ThemeVariables.SubTextColor});
 `;
@@ -374,5 +373,10 @@ const App = () => {
   );
 };
 
+performance.mark("render-start");
+
 const rootElement = document.getElementById("root");
 render(<App />, rootElement);
+
+performance.mark("render-end");
+performance.measure("render", "render-start", "render-end");

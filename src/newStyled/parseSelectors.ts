@@ -8,15 +8,10 @@ export type SelectorsMap = {
 
 export function parseSelectors(rules: string): SelectorsMap {
   const selectors = {};
-
   let tokenIndex = 0;
   let selector = DefaultSelector;
-  let name = "";
-  let remainingString = rules;
-  let i = 0;
 
-  while (i < 100 && rules.length > 0 && tokenIndex > -1) {
-    i++;
+  while (rules.length > 0 && tokenIndex > -1) {
     // Feels bad
     tokenIndex = rules.search(/{|;|}/);
 
@@ -36,7 +31,10 @@ export function parseSelectors(rules: string): SelectorsMap {
         // Start of new selector
         const newSelector = section.slice(0, section.length);
 
-        selector = (newSelector.indexOf("&") === -1) ? (selector + newSelector) : newSelector;                 
+        selector =
+          newSelector.indexOf("&") === -1
+            ? selector + newSelector
+            : newSelector;
         break;
 
       case "}":
@@ -47,8 +45,5 @@ export function parseSelectors(rules: string): SelectorsMap {
     rules = rules.substring(tokenIndex + 1);
   }
 
-if (i === 100) {
-  console.log('WHAT');
-}
   return selectors;
 }

@@ -31,10 +31,6 @@ export const styled: any = (
         )
       );
 
-      if (options) {
-        console.log(className);
-      }
-
       return <Component {...props} className={className} />;
     };
 
@@ -45,10 +41,7 @@ export const styled: any = (
   };
 };
 
-console.clear();
-
 function resolveWith(props, ...argSets) {
-  // console.log('resolve', arguments);
   const result = [];
 
   for (const args of argSets) {
@@ -67,12 +60,7 @@ function resolveWith(props, ...argSets) {
     }
   }
 
-  let retVal = result.join("");
-
-  if (props.displayName) {
-    console.log("Resolve!!!", props.displayName, arguments, retVal);
-  }
-  return retVal;
+  return result.join("");
 }
 
 const createFactory = type => {

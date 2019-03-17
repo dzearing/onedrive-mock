@@ -1,2 +1,2 @@
-export { ThemeProvider } from "./ThemeProvider.tsx";
+export { ThemeProvider } from "./ThemeProvider";
 export { styled } from "./styled";
