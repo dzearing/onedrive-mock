@@ -5,15 +5,19 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
+    "@types/styled-components": "4.1.10",
+    "emotion-theming": "^10.0.10",
     "office-ui-fabric-react": "6.157.0",
     "react": "16.8.4",
     "react-dom": "16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "16.7.22",
     "@types/react-dom": "16.0.11",
-    "@types/styled-components": "4.1.10",
     "typescript": "^3.3.3333"
   },
   "scripts": {

@@ -48,7 +48,7 @@ function _insertRule(selector, name, value) {
   const rule = `${selector}{${name}:${value};}`;
   const sheet = style.sheet as any;
 
-  // console.log("inserted", { selector, name, value });
+  // console.log("inserted");
 
   sheet.insertRule(rule, sheet.rules.length);
 }
