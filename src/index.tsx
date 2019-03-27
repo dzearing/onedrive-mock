@@ -10,7 +10,7 @@ import { NoWrapStyle } from "./commonStyles";
 import "./styles.css";
 
 initializeIcons();
-parseStyles();
+// parseStyles();
 
 const AppFrame = styled.div`
   ${props => props.theme.default}
@@ -74,6 +74,7 @@ const ProductTitle = styled.h1`
   font-size: 16px;
   flex-grow: 1;
 `;
+ProductTitle.displayName = "ProductTitle";
 
 const PersonaCoin = styled.div`
   flex-shrink: 0;
@@ -160,7 +161,7 @@ const Folders = styled.div`
   grid-gap: 8px;
 `;
 
-const Folder = styled(Button)`
+const FolderButton = styled(Button)`
   padding: 16px 8px;
   display: flex;
   flex-direction: column;
@@ -193,21 +194,17 @@ const FolderDate = styled.div`
   color: var(${ThemeVariables.SubTextColor});
 `;
 
+const Folder = props => (
+  <FolderButton>
+    <FolderImage />
+    <FolderTitle>{props.name}</FolderTitle>
+    <FolderDate>{props.date}</FolderDate>
+  </FolderButton>
+);
+
 const Persona = props => <PersonaCoin>DZ</PersonaCoin>;
 
-const App2 = () => {
-  const [isDark, setDark] = React.useState(false);
-
-  return (
-    <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
-      <AppFrame>
-        <SideNav>
-          <SideNavButton>Files</SideNavButton>
-        </SideNav>
-      </AppFrame>
-    </ThemeProvider>
-  );
-};
+const TestData = Array.from({ length: 200}).map((item, index) =>({ name: `Item ${index}`, date: 'Jan 26, 2017' }));
 
 const App = () => {
   const [isDark, setDark] = React.useState(false);
@@ -277,96 +274,7 @@ const App = () => {
           <Breadcrumb>Files</Breadcrumb>
 
           <Folders as={FocusZone} style={{ cellCount: 1200000 }}>
-            <Folder style={{ gridCell: 0 }}>
-              <FolderImage />
-              <FolderTitle>Apps</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder style={{ gridCell: 0 }}>
-              <FolderImage />
-              <FolderTitle>Documents jkl kjl jkljkljkl</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Media</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Projects</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Music</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Junk</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>
-            <Folder>
-              <FolderImage />
-              <FolderTitle>Recycle bin</FolderTitle>
-              <FolderDate>Jan 26, 2017</FolderDate>
-            </Folder>{" "}
+            { TestData.map(item => <Folder key={item.name} {...item}/> )}
           </Folders>
         </ItemView>
       </AppFrame>

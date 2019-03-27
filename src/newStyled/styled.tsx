@@ -21,7 +21,9 @@ export const styled: any = (
 
     Component = Component.__component || Component;
 
-    const result = props => {
+    const result = allProps => {
+      const { as, ...props} = allProps;
+      const Resolved = as || Component;      
       const theme = React.useContext(ThemeContext);
       const className = css(
         resolveWith(
@@ -31,7 +33,7 @@ export const styled: any = (
         )
       );
 
-      return <Component {...props} className={className} />;
+      return <Resolved {...props} className={className} />;
     };
 
     (result as any).__component = Component;
@@ -39,6 +41,14 @@ export const styled: any = (
 
     return result;
   };
+};
+
+export const withNames = (set) => {
+
+  for (const name in set) {
+    set[name].displayName = name;    
+  }
+  return set;
 };
 
 function resolveWith(props, ...argSets) {

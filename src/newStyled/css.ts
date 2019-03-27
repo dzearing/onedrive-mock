@@ -46,10 +46,11 @@ function _addClass(selector: string, name: string, value: string): string {
 function _insertRule(selector, name, value) {
   const style = getStyleElement();
   const rule = `${selector}{${name}:${value};}`;
+  const sheet = style.sheet as any;
 
-  console.log("inserted", { selector, name, value });
+  // console.log("inserted", { selector, name, value });
 
-  style.sheet.insertRule(rule, style.sheet.rules.length);
+  sheet.insertRule(rule, sheet.rules.length);
 }
 
 const Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -59,15 +60,17 @@ function getClassName(): string {
   return "a" + _counter++;
 }
 
-document.getRules = () => {
+// Rehydration experiment.
+(document as any).getRules = () => {
   const ruleStrings = [];
 
   ruleStrings.push('<style data-ms="1">');
 
-  const styles = document.querySelectorAll("style[data-ms]");
+  const styles = Array.from(document.querySelectorAll("style[data-ms]"));
 
   for (const style of styles) {
-    const rules = style.sheet.rules;
+    const sheet = (style as any).sheet as any;
+    const rules = sheet.rules;
 
     for (const rule of rules) {
       ruleStrings.push(rule.cssText);
