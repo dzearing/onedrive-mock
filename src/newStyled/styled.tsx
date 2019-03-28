@@ -25,17 +25,19 @@ export const styled: any = (
     Component = Component.__component || Component;
 
     const result = allProps => {
-      const { as, ...props } = allProps;
+      const { as, className, ...props } = allProps;
       const Resolved = as || Component;
       const theme = React.useContext(ThemeContext);
-      const className = resolveClass(
+      const newClassName = resolveClass(
         argCache,
         { ...props, theme, displayName: options && options.displayName },
         parentStyles,
         styles
       );
 
-      return <Resolved {...props} className={className} />;
+      return (
+        <Resolved {...props} className={[newClassName, className].join(" ")} />
+      );
     };
 
     (result as any).__component = Component;
@@ -90,7 +92,7 @@ function resolveClass(argCache, props, ...argSets) {
     }
     argCache.__retVal = css(cssStringArray.join(""));
   }
-  
+
   return argCache.__retVal;
 }
 

@@ -1,25 +1,12 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { MergeStylesApp} from './MergeStylesApp';
-import { EmotionApp} from './EmotionApp';
-import { StyledComponentsApp } from './StyledComponentsApp';
+import { App } from "./App";
 
-import { initializeIcons,} from "office-ui-fabric-react";
+import { initializeIcons } from "office-ui-fabric-react";
 
-import "./styles.css";
+import "./reset.css";
 
 initializeIcons();
-
-let App = MergeStylesApp;
-
-switch (document.location.search) {
-  case '?emotion': 
-    App = EmotionApp;
-    break;
-  case '?styled-components':
-    App = StyledComponentsApp;
-    break;
-}
 
 performance.mark("render-start");
 

@@ -1,11 +1,14 @@
 import * as React from "react";
-import { Icon } from "./Icon";
-import styled from "@emotion/styled";
-import { ThemeProvider } from "emotion-theming";
+import { StyleHelpers } from "./StyleHelpers";
 import { LightTheme, DarkTheme } from "./theme";
+import { Icon } from "./Icon";
 import * as ThemeVariables from "./themeVariables";
 import * as Fonts from "./fonts";
 import { NoWrapStyle } from "./commonStyles";
+import { FontSizes } from "@uifabric/styling";
+import { Items, Columns } from "./testData";
+
+const { ThemeProvider, styled, StyleMethod } = StyleHelpers;
 
 const AppFrame = styled.div`
   ${props => props.theme.default}
@@ -21,6 +24,15 @@ const AppFrame = styled.div`
   height: 100vh;
 `;
 AppFrame.displayName = "AppFrame";
+
+const flexGap = gap => `
+> * {
+  margin-left: ${gap};
+}
+> *:first-child {
+  margin-left: 0;
+}
+`;
 
 const Button = styled.button`
   ${Fonts.BodyFont}
@@ -45,17 +57,15 @@ const Button = styled.button`
     outline: none;
     box-shadow: 0 0 0 1px var(${ThemeVariables.FocusBorderColor}) inset;
   }
-
-  > * {
-    margin: 0 4px;
-  }
 `;
+
 Button.displayName = "Button";
 
 const SquareButton = styled(Button)`
-  width: 50px;
-  height: 50px;
+  width: ${props => props.size || "50px"};
+  height: ${props => props.size || "50px"};
 `;
+
 SquareButton.displayName = "SquareButton";
 
 const Header = styled.div`
@@ -92,6 +102,7 @@ const CommandBar = styled.div`
 
   grid-area: commands;
   display: flex;
+  padding: 0 20px;
 `;
 
 const CommandButton = styled(Button)`
@@ -101,6 +112,8 @@ const CommandButton = styled(Button)`
   & > [data-icon-name]:first-child {
     color: var(${ThemeVariables.IconColor});
   }
+
+  ${flexGap("8px")}
 `;
 
 const Search = styled.div`
@@ -125,7 +138,7 @@ const SideNav = styled.div`
   justify-content: stretch;
 `;
 
-const SideNavButton = styled(Button)`
+const SideNavButton = styled(Button, { displayName: "SideNavButton" })`
   justify-content: start;
   font-weight: 100;
   font-size: 18px;
@@ -140,12 +153,12 @@ const ItemView = styled.div`
   padding: 24px 32px;
   overflow: auto;
 
-  & > *:first-child {
-    margin: 0;
+  & > * {
+    margin-top: 20px;
   }
 
-  & > * {
-    margin: 20px 0;
+  & > *:first-child {
+    margin-top: 0;
   }
 `;
 
@@ -159,7 +172,7 @@ const Folders = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   grid-min-cells: 1000000;
   grid-gap: 8px;
-` as any;
+`;
 
 const FolderButton = styled(Button)`
   padding: 16px 8px;
@@ -191,6 +204,7 @@ const FolderTitle = styled.div`
 const FolderDate = styled.div`
   ${NoWrapStyle}
   font-size: 12px;
+
   color: var(${ThemeVariables.SubTextColor});
 `;
 
@@ -202,15 +216,98 @@ const Folder = props => (
   </FolderButton>
 );
 
+const DetailsList = styled.div``;
+
+const DetailsCheckButton = props => (
+  <Button {...props} style={{ position: "relative", width: 40 }}>
+    <Icon iconName="CircleRing" style={{ fontSize: 18 }} />
+    <Icon
+      style={{
+        fontSize: 16,
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        marginTop: -1,
+        transform: "translate(-50%, -50%)"
+      }}
+      iconName="StatusCircleCheckmark"
+    />
+  </Button>
+);
+
+const DetailsHeaderContainer = styled.div`
+  display: flex;
+  height: 32px;
+  line-height: 32px;
+  align-items: stretch;
+  border-bottom: 1px solid var(${ThemeVariables.BorderColor});
+`;
+
+const DetailsHeaderCell = styled.div`
+  display: flex;
+  justify-content: start;
+  font-size: ${FontSizes.small};
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding: 0 8px;
+
+  & > * {
+    margin-left: 4px;
+  }
+  & > *:first-child {
+    margin-left: 0;
+  }
+  ${NoWrapStyle}
+`;
+
+const DetailsHeaderButton = styled(Button)`
+  justify-content: start;
+  font-size: ${FontSizes.small};
+`;
+
+const DetailsHeader = props => (
+  <DetailsHeaderContainer>
+    <DetailsCheckButton size="40px" />
+    {Columns.map(column => (
+      <DetailsHeaderCell
+        {...column}
+        as={column.canSort && DetailsHeaderButton}
+      />
+    ))}
+  </DetailsHeaderContainer>
+);
+
+const DetailsRowContainer = styled(DetailsHeaderContainer)`
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+
+  :hover {
+    background: var(${ThemeVariables.BackgroundHoverColor});
+  }
+  :active {
+    background: var(${ThemeVariables.BackgroundPressedColor});
+  }
+`;
+
+const DetailsRowCell = styled(DetailsHeaderCell)``;
+
+const DetailsRow = (props: { columns: any; item: any }) => (
+  <DetailsRowContainer>
+    <DetailsCheckButton as="span" size="40px" />
+    {props.columns.map(column => (
+      <DetailsRowCell style={column.style}>
+        {props.item[column.key]}
+      </DetailsRowCell>
+    ))}
+  </DetailsRowContainer>
+);
+
 const Persona = props => <PersonaCoin>DZ</PersonaCoin>;
 
-const TestData = Array.from({ length: 200 }).map((item, index) => ({
-  name: `Item ${index}`,
-  date: "Jan 26, 2017"
-}));
-
-export const EmotionApp = () => {
+export const App = () => {
   const [isDark, setDark] = React.useState(false);
+  const [isListView, setListView] = React.useState(true);
 
   return (
     <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
@@ -219,7 +316,7 @@ export const EmotionApp = () => {
           <SquareButton>
             <Icon iconName="waffle" style={{ fontSize: 24 }} />
           </SquareButton>
-          <ProductTitle>OneDrive (using emotion)</ProductTitle>
+          <ProductTitle>{`OneDrive (${StyleMethod})`}</ProductTitle>
           <SquareButton>
             <Icon iconName="help" style={{ fontSize: 16 }} />
           </SquareButton>
@@ -256,8 +353,11 @@ export const EmotionApp = () => {
             <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
           </CommandButton>
 
-          <CommandButton>
-            <Icon iconName="viewall" style={{ fontSize: 16 }} />
+          <CommandButton onClick={() => setListView(!isListView)}>
+            <Icon
+              iconName={isListView ? "list" : "viewall"}
+              style={{ fontSize: 16 }}
+            />
           </CommandButton>
 
           <CommandButton>
@@ -276,11 +376,20 @@ export const EmotionApp = () => {
         <ItemView>
           <Breadcrumb>Files</Breadcrumb>
 
-          <Folders>
-            {TestData.map(item => (
-              <Folder key={item.name} {...item} />
-            ))}
-          </Folders>
+          {isListView ? (
+            <DetailsList>
+              <DetailsHeader />
+              {Items.map(item => (
+                <DetailsRow key={item.name} columns={Columns} item={item} />
+              ))}
+            </DetailsList>
+          ) : (
+            <Folders>
+              {Items.map(item => (
+                <Folder key={item.name} {...item} />
+              ))}
+            </Folders>
+          )}
         </ItemView>
       </AppFrame>
     </ThemeProvider>
