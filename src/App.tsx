@@ -66,9 +66,30 @@ const SquareButton = styled(Button)`
   height: ${props => props.size || "50px"};
 `;
 
+const ToggleButton = styled(SquareButton, {
+  state: p => {
+    const [isToggled, setToggled] = React.useState(false);
+    return {
+      ...p,
+      isToggled,
+      onClick: ev => {
+        setToggled(!isToggled);
+        p.onClick && p.onClick(ev);
+      }
+    };
+  }
+})`
+  background-color: var(
+    ${p =>
+      p.isToggled
+        ? ThemeVariables.BackgroundPressedColor
+        : ThemeVariables.BackgroundColor}
+  );
+`;
+
 SquareButton.displayName = "SquareButton";
 
-const Header = styled.div`
+const Header = styled("div", { displayName: "Header" })`
   foo: bar;
   grid-area: header;
   display: flex;
@@ -76,7 +97,6 @@ const Header = styled.div`
   align-items: center;
   ${props => props.theme.strong}
 `;
-Header.displayName = "Header";
 
 const ProductTitle = styled.h1`
   ${Fonts.SemiBoldFont}
@@ -227,7 +247,7 @@ const DetailsCheckButton = props => (
         position: "absolute",
         left: "50%",
         top: "50%",
-        marginTop: -1,
+        marginTop: -1.5,
         transform: "translate(-50%, -50%)"
       }}
       iconName="StatusCircleCheckmark"
@@ -267,7 +287,7 @@ const DetailsHeaderButton = styled(Button)`
 
 const DetailsHeader = props => (
   <DetailsHeaderContainer>
-    <DetailsCheckButton size="40px" />
+    <DetailsCheckButton size="40px" style={{ flexShrink: 0 }} />
     {Columns.map(column => (
       <DetailsHeaderCell
         {...column}
@@ -279,8 +299,8 @@ const DetailsHeader = props => (
 
 const DetailsRowContainer = styled(DetailsHeaderContainer)`
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 42px;
+  line-height: 42px;
 
   :hover {
     background: var(${ThemeVariables.BackgroundHoverColor});
@@ -294,7 +314,7 @@ const DetailsRowCell = styled(DetailsHeaderCell)``;
 
 const DetailsRow = (props: { columns: any; item: any }) => (
   <DetailsRowContainer>
-    <DetailsCheckButton as="span" size="40px" />
+    <DetailsCheckButton as="span" size="40px" style={{ flexShrink: 0 }} />
     {props.columns.map(column => (
       <DetailsRowCell style={column.style}>
         {props.item[column.key]}
@@ -313,9 +333,9 @@ export const App = () => {
     <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
       <AppFrame>
         <Header>
-          <SquareButton>
+          <ToggleButton>
             <Icon iconName="waffle" style={{ fontSize: 24 }} />
-          </SquareButton>
+          </ToggleButton>
           <ProductTitle>{`OneDrive (${StyleMethod})`}</ProductTitle>
           <SquareButton>
             <Icon iconName="help" style={{ fontSize: 16 }} />

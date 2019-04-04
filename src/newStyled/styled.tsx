@@ -11,11 +11,9 @@ export interface StyledType extends StyledFunction {
   div: StyledFunction;
 }
 
-const USE_CACHED_RESULTS = true;
-
 export const styled: any = (
   Component: ComponentType,
-  options?: { displayName: string }
+  options: { displayName?: string; state?: Function } = {}
 ) => {
   return function() {
     const styles = arguments;
@@ -28,18 +26,28 @@ export const styled: any = (
       const { as, className, ...props } = allProps;
       const Resolved = as || Component;
       const theme = React.useContext(ThemeContext);
-      const newClassName = resolveClass(
+      const viewProps = {
+        ...(options.state ? options.state(props) : props),
+        theme
+      };
+
+      viewProps.className = resolveClass(
         argCache,
-        { ...props, theme, displayName: options && options.displayName },
+        viewProps,
         parentStyles,
         styles
       );
 
-      return (
-        <Resolved {...props} className={[newClassName, className].join(" ")} />
-      );
+      if (className) {
+        viewProps.className += " " + className;
+      }
+
+      delete viewProps.theme;
+
+      return <Resolved {...viewProps} />;
     };
 
+    result.displayName = options.displayName;
     (result as any).__component = Component;
     (result as any).__styles = styles;
 

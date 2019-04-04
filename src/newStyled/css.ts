@@ -53,11 +53,24 @@ function _insertRule(selector, name, value) {
   sheet.insertRule(rule, sheet.rules.length);
 }
 
-const Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const CharacterCount = Characters.length;
 let _counter = 0;
 
 function getClassName(): string {
-  return "a" + _counter++;
+  let className = '';
+  let val = _counter++;
+
+  if (val < CharacterCount) {
+    return Characters[val % CharacterCount];
+  } else {
+    while (val > 0) {
+      className = Characters[val % CharacterCount] + className;
+      val = Math.floor(val / CharacterCount);
+    }  
+  }
+
+  return className;
 }
 
 // Rehydration experiment.
