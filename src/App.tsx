@@ -66,27 +66,6 @@ const SquareButton = styled(Button)`
   height: ${props => props.size || "50px"};
 `;
 
-const ToggleButton = styled(SquareButton, {
-  state: p => {
-    const [isToggled, setToggled] = React.useState(false);
-    return {
-      ...p,
-      isToggled,
-      onClick: ev => {
-        setToggled(!isToggled);
-        p.onClick && p.onClick(ev);
-      }
-    };
-  }
-})`
-  background-color: var(
-    ${p =>
-      p.isToggled
-        ? ThemeVariables.BackgroundPressedColor
-        : ThemeVariables.BackgroundColor}
-  );
-`;
-
 SquareButton.displayName = "SquareButton";
 
 const Header = styled("div", { displayName: "Header" })`
@@ -325,93 +304,96 @@ const DetailsRow = (props: { columns: any; item: any }) => (
 
 const Persona = props => <PersonaCoin>DZ</PersonaCoin>;
 
-export const App = () => {
+export const App = props => {
   const [isDark, setDark] = React.useState(false);
   const [isListView, setListView] = React.useState(true);
 
   return (
     <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
-      <AppFrame>
-        <Header>
-          <ToggleButton>
-            <Icon iconName="waffle" style={{ fontSize: 24 }} />
-          </ToggleButton>
-          <ProductTitle>{`OneDrive (${StyleMethod})`}</ProductTitle>
-          <SquareButton>
-            <Icon iconName="help" style={{ fontSize: 16 }} />
-          </SquareButton>
-          <SquareButton>
-            <Persona />
-          </SquareButton>
-        </Header>
-        <Search>
-          <Icon iconName="search" />
-          <span>Search everything</span>
-        </Search>
+      <>
+        <AppFrame>
+          <Header>
+            <SquareButton>
+              <Icon iconName="waffle" style={{ fontSize: 24 }} />
+            </SquareButton>
+            <ProductTitle>{`OneDrive (${StyleMethod})`}</ProductTitle>
+            <SquareButton>
+              <Icon iconName="help" style={{ fontSize: 16 }} />
+            </SquareButton>
+            <SquareButton>
+              <Persona />
+            </SquareButton>
+          </Header>
+          <Search>
+            <Icon iconName="search" />
+            <span>Search everything</span>
+          </Search>
 
-        <CommandBar>
-          <div style={{ display: "flex", flexGrow: 1 }}>
+          <CommandBar>
+            <div style={{ display: "flex", flexGrow: 1 }}>
+              <CommandButton>
+                <Icon iconName="add" style={{ fontSize: 16 }} />
+                <span>New</span>
+                <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+              </CommandButton>
+              <CommandButton>
+                <Icon iconName="upload" style={{ fontSize: 16 }} />
+                <span>Upload</span>
+                <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+              </CommandButton>
+              <CommandButton onClick={() => setDark(!isDark)}>
+                <Icon iconName="brush" style={{ fontSize: 16 }} />
+                <span>{isDark ? "Light mode" : "Dark mode"}</span>
+              </CommandButton>
+            </div>
+
             <CommandButton>
-              <Icon iconName="add" style={{ fontSize: 16 }} />
-              <span>New</span>
+              <Icon iconName="sortlines" style={{ fontSize: 16 }} />
+              <span>Sort</span>
               <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
             </CommandButton>
+
+            <CommandButton onClick={() => setListView(!isListView)}>
+              <Icon
+                iconName={isListView ? "list" : "viewall"}
+                style={{ fontSize: 16 }}
+              />
+            </CommandButton>
+
             <CommandButton>
-              <Icon iconName="upload" style={{ fontSize: 16 }} />
-              <span>Upload</span>
-              <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+              <Icon iconName="info" style={{ fontSize: 16 }} />
             </CommandButton>
-            <CommandButton onClick={() => setDark(!isDark)}>
-              <Icon iconName="brush" style={{ fontSize: 16 }} />
-              <span>{isDark ? "Light mode" : "Dark mode"}</span>
-            </CommandButton>
-          </div>
+          </CommandBar>
 
-          <CommandButton>
-            <Icon iconName="sortlines" style={{ fontSize: 16 }} />
-            <span>Sort</span>
-            <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
-          </CommandButton>
+          <SideNav>
+            <SideNavButton>Files</SideNavButton>
+            <SideNavButton>Recent</SideNavButton>
+            <SideNavButton>Photos</SideNavButton>
+            <SideNavButton>Shared</SideNavButton>
+            <SideNavButton>Recycle bin</SideNavButton>
+          </SideNav>
 
-          <CommandButton onClick={() => setListView(!isListView)}>
-            <Icon
-              iconName={isListView ? "list" : "viewall"}
-              style={{ fontSize: 16 }}
-            />
-          </CommandButton>
+          <ItemView>
+            <Breadcrumb>Files</Breadcrumb>
 
-          <CommandButton>
-            <Icon iconName="info" style={{ fontSize: 16 }} />
-          </CommandButton>
-        </CommandBar>
-
-        <SideNav>
-          <SideNavButton>Files</SideNavButton>
-          <SideNavButton>Recent</SideNavButton>
-          <SideNavButton>Photos</SideNavButton>
-          <SideNavButton>Shared</SideNavButton>
-          <SideNavButton>Recycle bin</SideNavButton>
-        </SideNav>
-
-        <ItemView>
-          <Breadcrumb>Files</Breadcrumb>
-
-          {isListView ? (
-            <DetailsList>
-              <DetailsHeader />
-              {Items.map(item => (
-                <DetailsRow key={item.name} columns={Columns} item={item} />
-              ))}
-            </DetailsList>
-          ) : (
-            <Folders>
-              {Items.map(item => (
-                <Folder key={item.name} {...item} />
-              ))}
-            </Folders>
-          )}
-        </ItemView>
-      </AppFrame>
+            {isListView ? (
+              <DetailsList>
+                <DetailsHeader />
+                {Items.map(item => (
+                  <DetailsRow key={item.name} columns={Columns} item={item} />
+                ))}
+              </DetailsList>
+            ) : (
+              <Folders>
+                {Items.map(item => (
+                  <Folder key={item.name} {...item} />
+                ))}
+              </Folders>
+            )}
+          </ItemView>
+        </AppFrame>
+        {props.children}
+      </>
     </ThemeProvider>
   );
 };

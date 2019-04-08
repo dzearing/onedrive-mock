@@ -79,7 +79,7 @@ export const Columns = [
     )
   }
 ];
-export const Items = Array.from({ length: 50 }).map((item, index) => ({
+export const Items = Array.from({ length: 100 }).map((item, index) => ({
   key: `${index}`,
   type: <FolderIcon />,
   name: `Item ${index}`,

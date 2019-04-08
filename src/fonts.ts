@@ -3,6 +3,5 @@ export const SemiLightFont = `font-family: SegoeUI-SemiLight-final,"Segoe UI Sem
 export const BodyFont = `
   font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-size: 14px;
   font-weight: 400;
 `;
