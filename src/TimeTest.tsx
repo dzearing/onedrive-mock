@@ -158,7 +158,7 @@ const TimingRoot = styled.div`
   border-radius: 4px;
   box-shadow: 0 6.4px 14.4px 0 var(--callout-shadow-color, rgba(0, 0, 0, 0.132)),
     0 1.2px 3.6px 0 var(--callout-shadow-secondary-color, rgba(0, 0, 0, 0.108));
-  bottom: 10px;
+  bottom: 30px;
   right: 30px;
   padding: 20px;
   font-size: 12px;

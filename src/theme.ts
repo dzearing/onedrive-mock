@@ -13,7 +13,7 @@ const LightScheme = `
   ${ThemeVariables.FocusBorderColor}: black;
   ${ThemeVariables.SubTextColor}: #888;
   ${ThemeVariables.TextColor}: #333;
-  ${ThemeVariables.IconColor}: rgb(16, 110, 190);
+  ${ThemeVariables.IconColor}: inherit;
   ${ThemeVariables.BorderColor}: #eaeaea;
   ${ApplyThemeStyle}
 `;
@@ -25,7 +25,7 @@ const StrongScheme = `
   ${ThemeVariables.FocusBorderColor}: #c7e0f4;
   ${ThemeVariables.SubTextColor}: #888;
   ${ThemeVariables.TextColor}: #fff;
-  ${ThemeVariables.IconColor}: #ff;
+  ${ThemeVariables.IconColor}: inherit;
   ${ThemeVariables.BorderColor}: #eaeaea;
   ${ApplyThemeStyle}
 `;

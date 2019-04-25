@@ -34,7 +34,14 @@ const flexGap = gap => `
 }
 `;
 
-const Button = styled.button`
+const a = {
+  "&": {
+    "margin-left": "0"
+  },
+  "@media() { & }": {}
+};
+
+const Button = styled("button", { displayName: "Button" })`
   ${Fonts.BodyFont}
   ${NoWrapStyle}
   display: flex;
@@ -58,8 +65,6 @@ const Button = styled.button`
     box-shadow: 0 0 0 1px var(${ThemeVariables.FocusBorderColor}) inset;
   }
 `;
-
-Button.displayName = "Button";
 
 const SquareButton = styled(Button)`
   width: ${props => props.size || "50px"};
@@ -107,11 +112,7 @@ const CommandBar = styled.div`
 const CommandButton = styled(Button)`
   height: 40px;
   padding: 0 12px;
-
-  & > [data-icon-name]:first-child {
-    color: var(${ThemeVariables.IconColor});
-  }
-
+  font-size: 14px;
   ${flexGap("8px")}
 `;
 
