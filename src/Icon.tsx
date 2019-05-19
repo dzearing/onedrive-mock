@@ -2,7 +2,7 @@ import * as React from "react";
 import { getIcon } from "office-ui-fabric-react";
 
 export const Icon = props => {
-  const { iconName } = props;
+  const { iconName, ...p } = props;
   const icon = getIcon(iconName);
 
   if (!icon) {
@@ -11,7 +11,7 @@ export const Icon = props => {
 
   return (
     <i
-      {...props}
+      {...p}
       data-icon-name={iconName}
       className={icon.subset && icon.subset.className}
     >

@@ -124,7 +124,7 @@ export function measureRender({
       unmountComponentAtNode(element);
       performance.mark("unmount");
       _addMeasurement(timings.unmount, performance.now() - now);
-      setTimeout(nextRender, 100);
+      setTimeout(nextRender, 50);
     }
 
     function nextRender() {

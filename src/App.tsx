@@ -69,7 +69,6 @@ const SquareButton = styled(Button)`
 SquareButton.displayName = "SquareButton";
 
 const Header = styled("div", { displayName: "Header" })`
-  foo: bar;
   grid-area: header;
   display: flex;
   flex-direction: row;
