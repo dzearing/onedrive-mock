@@ -49,6 +49,11 @@ export const CommandBar = createPure<ICommandBarProps>("CommandBar", props => {
     ...p
   } = props;
 
+  const onThemeClick = React.useCallback(() => setDark(!isDark), [isDark]);
+  const onViewClick = React.useCallback(() => setListView(!isListView), [
+    isListView
+  ]);
+
   return (
     <C {...p} className={cx(className, "ms-scheme-neutral")}>
       <div style={{ display: "flex", flexGrow: 1 }}>
@@ -57,14 +62,14 @@ export const CommandBar = createPure<ICommandBarProps>("CommandBar", props => {
         <CommandButton
           iconName="brush"
           text={isDark ? "Light mode" : "Dark mode"}
-          onClick={() => setDark(!isDark)}
+          onClick={onThemeClick}
         />
       </div>
 
       <CommandButton iconName="sortlines" text="Sort" isMenu />
       <CommandButton
         iconName={isListView ? "list" : "viewall"}
-        onClick={() => setListView(!isListView)}
+        onClick={onViewClick}
       />
       <CommandButton iconName="info" />
     </C>
