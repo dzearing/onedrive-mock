@@ -17,7 +17,7 @@ export const Columns = [
       justifyContent: "center",
       alignItems: "center",
       textAlign: "center"
-    },
+    } as React.CSSProperties,
     children: <Icon iconName="Page" />
   },
   {

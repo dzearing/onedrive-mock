@@ -1,0 +1,13 @@
+@import "./ThemeVariables.scss";
+@import "./Utilities.scss";
+
+.ms-PersonaCoin {
+  flex-shrink: 0;
+  background-color: rgb(126, 56, 120);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

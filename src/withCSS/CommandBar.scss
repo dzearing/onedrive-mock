@@ -1,0 +1,19 @@
+@import "./ThemeVariables.scss";
+@import "./Utilities.scss";
+
+.ms-CommandBar {
+  grid-area: commands;
+  display: flex;
+  padding: 0 20px;
+}
+
+.ms-CommandButton {
+  @include flex-gap(8px);
+
+  height: 40px;
+  padding: 0 12px;
+
+  & > [data-icon-name]:first-child {
+    color: $iconColorVar;
+  }
+}

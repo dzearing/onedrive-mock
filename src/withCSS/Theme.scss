@@ -1,0 +1,77 @@
+@import "./ThemeVariables.scss";
+
+.ms-theme-light {
+  @include apply-theme();
+  @include textColor(#333);
+  @include backgroundColor(white);
+  @include borderColor(#eaeaea);
+  @include backgroundHoverColor(#eee);
+  @include backgroundPressedColor(#ccc);
+  @include backgroundDisabledColor(red);
+  @include focusBorderColor(black);
+  @include subTextColor(#888);
+  @include textDisabledColor(red);
+  @include iconColor(rgb(16, 110, 190));
+  @include linkColor(red);
+  @include linkHoverColor(red);
+
+  .ms-scheme-strong {
+    @include apply-theme();
+    @include textColor(#333);
+    @include backgroundColor(#0078d4);
+    @include borderColor(#eaeaea);
+    @include backgroundHoverColor(#2b88d8);
+    @include backgroundPressedColor(#71afe5);
+    @include backgroundDisabledColor(red);
+    @include focusBorderColor(#c7e0f4);
+    @include subTextColor(#888);
+    @include textColor(#fff);
+    @include textDisabledColor(red);
+    @include iconColor(#fff);
+    @include linkColor(red);
+    @include linkHoverColor(red);
+  }
+
+  .ms-scheme-neutral {
+    @include apply-theme();
+    @include textColor(black);
+    @include backgroundColor(rgb(244, 244, 244));
+    @include borderColor(rgb(244, 244, 244));
+    @include backgroundHoverColor(rgb(234, 234, 234));
+    @include backgroundPressedColor(rgb(218, 218, 218));
+    @include backgroundDisabledColor(red);
+    @include focusBorderColor(black);
+    @include subTextColor(#666);
+    @include textDisabledColor(red);
+    @include iconColor(rgb(16, 110, 190));
+    @include linkColor(red);
+    @include linkHoverColor(red);
+  }
+}
+
+.ms-theme-dark {
+  @include apply-theme();
+  @include textColor(white);
+  @include backgroundColor(#484644);
+  @include borderColor(#585654);
+  @include backgroundHoverColor(#323130);
+  @include backgroundPressedColor(#222120);
+  @include backgroundDisabledColor(red);
+  @include focusBorderColor(white);
+  @include subTextColor(#aaa);
+  @include textDisabledColor(red);
+  @include iconColor(white);
+  @include linkColor(red);
+  @include linkHoverColor(red);
+
+  .ms-scheme-strong,
+  .ms-scheme-dark {
+    @include apply-theme();
+    @include textColor(white);
+    @include backgroundColor(#383634);
+    @include borderColor(#585654);
+    @include backgroundHoverColor(#222120);
+    @include backgroundPressedColor(#121110);
+    @include backgroundDisabledColor(red);
+  }
+}

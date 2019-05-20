@@ -1,0 +1,14 @@
+@mixin flex-gap($gap) {
+  > * {
+    margin-left: $gap;
+  }
+  > *:first-child {
+    margin-left: 0;
+  }
+}
+
+@mixin no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

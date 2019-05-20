@@ -1,0 +1,15 @@
+@import "./ThemeVariables.scss";
+@import "./Utilities.scss";
+
+.ms-DetailsRow {
+  @include apply-interactive-theme();
+
+  display: flex;
+  top: 0;
+  align-items: stretch;
+  border-bottom: 1px solid $borderColorVar;
+
+  width: 100%;
+  height: 42px;
+  line-height: 42px;
+}

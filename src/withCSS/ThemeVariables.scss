@@ -1,0 +1,127 @@
+@mixin textColor($val) {
+  --ms-textColor: #{$val};
+}
+$textColor: --ms-textColor;
+$textColorVar: var($textColor);
+
+@mixin backgroundColor($val) {
+  --ms-backgroundColor: #{$val};
+}
+$backgroundColor: --ms-backgroundColor;
+$backgroundColorVar: var(--ms-backgroundColor);
+
+@mixin borderColor($val) {
+  --ms-borderColor: #{$val};
+}
+$borderColor: --ms-borderColor;
+$borderColorVar: var(--ms-borderColor);
+
+@mixin backgroundHoverColor($val) {
+  --ms-backgroundHoverColor: #{$val};
+}
+$backgroundHoverColor: --ms-backgroundHoverColor;
+$backgroundHoverColorVar: var(--ms-backgroundHoverColor);
+
+@mixin backgroundPressedColor($val) {
+  --ms-backgroundPressedColor: #{$val};
+}
+$backgroundPressedColor: --ms-backgroundPressedColor;
+$backgroundPressedColorVar: var(--ms-backgroundPressedColor);
+
+@mixin backgroundDisabledColor($val) {
+  --ms-backgroundDisabledColor: #{$val};
+}
+$backgroundDisabledColor: --ms-backgroundDisabledColor;
+$backgroundDisabledColorVar: var(--ms-backgroundDisabledColor);
+
+@mixin focusBorderColor($val) {
+  --ms-focusBorderColor: #{$val};
+}
+$focusBorderColor: --ms-focusBorderColor;
+$focusBorderColorVar: var(--ms-focusBorderColor);
+
+@mixin subTextColor($val) {
+  --ms-subTextColor: #{$val};
+}
+$subTextColor: --ms-subTextColor;
+$subTextColorVar: var(--ms-subTextColor);
+
+@mixin textDisabledColor($val) {
+  --ms-textDisabledColor: #{$val};
+}
+$textDisabledColor: --ms-textDisabledColor;
+$textDisabledColorVar: var(--ms-textDisabledColor);
+
+@mixin iconColor($val) {
+  --ms-iconColor: #{$val};
+}
+$iconColor: --ms-iconColor;
+$iconColorVar: var(--ms-iconColor);
+
+@mixin linkColor($val) {
+  --ms-linkColor: #{$val};
+}
+$linkColor: --ms-linkColor;
+$linkColorVar: var(--ms-linkColor);
+
+@mixin linkHoverColor($val) {
+  --ms-linkHoverColor: #{$val};
+}
+$linkHoverColor: --ms-linkHoverColor;
+$linkHoverColorVar: var(--ms-linkHoverColor);
+
+$fontSizeSmall200: 10px;
+$fontSizeSmall100: 12px;
+$fontSizeRegular: 13px;
+$fontSizeLarge100: 15px;
+$fontSizeLarge200: 20px;
+$fontSizeLarge300: 24px;
+$fontSizeLarge400: 32px;
+
+@mixin semi-bold-font() {
+  font-family: "SegoeUI-SemiBold-final", "Segoe UI Semibold",
+    "SegoeUI-Regular-final", "Segoe UI", "Segoe UI Web (West European)", Segoe,
+    -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Tahoma,
+    Helvetica, Arial, sans-serif;
+}
+
+@mixin semi-light-font() {
+  font-family: SegoeUI-SemiLight-final, "Segoe UI Semilight",
+    SegoeUI-Regular-final, "Segoe UI", "Segoe UI Web (West European)", Segoe,
+    -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Tahoma,
+    Helvetica, Arial, sans-serif;
+}
+
+@mixin body-font() {
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI",
+    -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+}
+
+@mixin apply-theme {
+  background-color: $backgroundColorVar;
+  color: $textColorVar;
+}
+
+@mixin apply-interactive-theme {
+  @include apply-theme();
+
+  &:hover {
+    background-color: $backgroundHoverColorVar;
+  }
+
+  &:active {
+    background-color: $backgroundPressedColorVar;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px $focusBorderColorVar inset;
+  }
+
+  &[aria-disabled] {
+    background-color: $backgroundDisabledColorVar;
+    color: $textDisabledColorVar;
+  }
+}

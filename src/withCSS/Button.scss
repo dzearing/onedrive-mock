@@ -1,0 +1,16 @@
+@import "./ThemeVariables.scss";
+@import "./Utilities.scss";
+
+.ms-Button {
+  @include body-font();
+  @include no-wrap();
+  @include apply-interactive-theme();
+
+  font-size: $fontSizeRegular;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+}

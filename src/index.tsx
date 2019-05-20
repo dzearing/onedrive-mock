@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { App } from "./App";
-import { AppWithCSS } from "./AppWithCSS";
+import { App as AppWithCSS } from "./withCSS/App";
 import { initializeIcons } from "office-ui-fabric-react";
 import { measureRender, Timing } from "./TimeTest";
 import "./reset.css";

@@ -1,7 +1,13 @@
 import * as React from "react";
 import { getIcon } from "office-ui-fabric-react";
+import cx from "classnames";
+import { IComponentProps } from "./withCSS/create";
 
-export const Icon = props => {
+export interface IIconProps extends IComponentProps {
+  iconName: string;
+}
+
+export const Icon = React.memo<IIconProps>(props => {
   const { iconName, ...p } = props;
   const icon = getIcon(iconName);
 
@@ -13,9 +19,9 @@ export const Icon = props => {
     <i
       {...p}
       data-icon-name={iconName}
-      className={icon.subset && icon.subset.className}
+      className={cx(icon.subset && icon.subset.className, p.className)}
     >
       {icon.code}
     </i>
   );
-};
+});
