@@ -5,7 +5,6 @@ import { Button } from "./Button";
 
 import "./DetailsHeader.scss";
 
-const DetailsHeaderContainer = create("DetailsHeaderContainer");
 const DetailsHeaderCell = createPure("DetailsHeaderCell");
 const DetailsHeaderButton = createPure("DetailsHeaderButton", Button);
 
@@ -16,10 +15,10 @@ interface IDetailsHeaderProps extends IComponentProps {
 export const DetailsHeader = create<IDetailsHeaderProps>(
   "DetailsHeader",
   props => {
-    const { columns, ...p } = props;
+    const { as: C = "div", columns, ...p } = props;
 
     return (
-      <DetailsHeaderContainer {...p}>
+      <C {...p}>
         <Check on />
         {columns.map(column => (
           <DetailsHeaderCell
@@ -30,7 +29,7 @@ export const DetailsHeader = create<IDetailsHeaderProps>(
             {column.children}
           </DetailsHeaderCell>
         ))}
-      </DetailsHeaderContainer>
+      </C>
     );
   }
 );

@@ -1,35 +1,30 @@
 @import "./ThemeVariables.scss";
 @import "./Utilities.scss";
 
-.ms-DetailsHeaderContainer {
+.ms-DetailsHeader {
   @include apply-theme();
 
   display: flex;
   position: sticky;
   z-index: 1;
   top: -24px;
+  width: 100%;
   height: 32px;
   line-height: 32px;
   align-items: stretch;
+  box-sizing: border-box;
   border-bottom: 1px solid $borderColorVar;
 }
 
-.ms-DetailsHeaderCell,
-.ms-DetailsRowCell {
-  @include no-wrap;
+.ms-DetailsHeaderCell {
+  @include no-wrap();
+  @include horizontal-gap(4px);
+
   display: flex;
   justify-content: flex-start;
   font-size: $fontSizeSmall100;
-  flex-grow: 1;
   box-sizing: border-box;
   padding: 0 8px;
-
-  & > * {
-    margin-left: 4px;
-  }
-  & > *:first-child {
-    margin-left: 0;
-  }
 }
 
 .ms-DetailsHeaderButton {

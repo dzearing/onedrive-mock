@@ -12,3 +12,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin horizontal-gap($hGapVal) {
+  & > * {
+    margin-left: $hGapVal;
+  }
+  & > *:first-child {
+    margin-left: 0;
+  }
+}
