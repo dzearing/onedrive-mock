@@ -10,16 +10,16 @@ import { CommandBar } from "./CommandBar";
 
 import "./App.scss";
 
-const AppFrame = createPure("AppFrame");
-const Search = createPure("Search");
-const SideNav = createPure("SideNav", "div");
+const AppFrame = create("AppFrame");
+const Search = create("Search");
+const SideNav = create("SideNav", "div");
 const SideNavButton = createPure("SideNavButton", Button);
-const ItemView = createPure("ItemView");
-const Breadcrumb = createPure("Breadcrumb");
-const Folders = createPure("Folders");
-const FolderButton = createPure("FolderButton", Button);
+const ItemView = create("ItemView");
+const Breadcrumb = create("Breadcrumb");
+const Folders = create("Folders");
+const FolderButton = create("FolderButton", Button);
 
-const FolderImage = () => (
+const FolderImage = createPure('FolderImage', () => (
   <div style={{ position: "relative", alignSelf: "center" }}>
     <img src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_backplate.svg" />
     <img
@@ -27,18 +27,18 @@ const FolderImage = () => (
       src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_frontplate_thumbnail.svg"
     />
   </div>
-);
+));
 
 const FolderTitle = createPure("FolderTitle");
 const FolderDate = createPure("FolderDate");
 
-const Folder = props => (
+const Folder = createPure('Folder', props => (
   <FolderButton>
     <FolderImage />
     <FolderTitle>{props.name}</FolderTitle>
     <FolderDate>{props.date}</FolderDate>
   </FolderButton>
-);
+));
 
 export const App = props => {
   const [isDark, setDark] = React.useState(false);
