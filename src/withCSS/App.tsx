@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Icon } from "../Icon";
 import cx from "classnames";
-import { createPure } from "./create";
+import { create, createPure } from "./create";
 import { Button } from "./Button";
 import { Header } from "./Header";
 import { DetailsList } from "./DetailsList";
