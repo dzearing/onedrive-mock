@@ -7,6 +7,8 @@ import * as Fonts from "./fonts";
 import { NoWrapStyle } from "./commonStyles";
 import { FontSizes } from "@uifabric/styling";
 import { Items, Columns } from "./testData";
+import { Viewport } from "./virtualizedList/Viewport";
+import { FixedList } from "./virtualizedList/FixedList";
 
 const { ThemeProvider, styled, StyleMethod } = StyleHelpers;
 
@@ -290,16 +292,18 @@ const DetailsRowContainer = styled(DetailsHeaderContainer)`
 
 const DetailsRowCell = styled(DetailsHeaderCell)``;
 
-const DetailsRow = (props: { columns: any; item: any }) => (
-  <DetailsRowContainer>
-    <DetailsCheckButton as="span" size="40px" style={{ flexShrink: 0 }} />
-    {props.columns.map(column => (
-      <DetailsRowCell style={column.style}>
-        {props.item[column.key]}
-      </DetailsRowCell>
-    ))}
-  </DetailsRowContainer>
-);
+const DetailsRow = props => {
+  const { item, index, columns, ...rest } = props;
+
+  return (
+    <DetailsRowContainer {...rest}>
+      <DetailsCheckButton as="span" size="40px" style={{ flexShrink: 0 }} />
+      {columns.map(column => (
+        <DetailsRowCell style={column.style}>{item[column.key]}</DetailsRowCell>
+      ))}
+    </DetailsRowContainer>
+  );
+};
 
 const Persona = props => <PersonaCoin>DZ</PersonaCoin>;
 
@@ -372,16 +376,19 @@ export const App = props => {
             <SideNavButton>Recycle bin</SideNavButton>
           </SideNav>
 
-          <ItemView>
+          <Viewport as={ItemView}>
             <Breadcrumb>Files</Breadcrumb>
 
             {isListView ? (
-              <DetailsList>
+              <>
                 <DetailsHeader />
-                {Items.map(item => (
-                  <DetailsRow key={item.name} columns={Columns} item={item} />
-                ))}
-              </DetailsList>
+                <FixedList
+                  items={Items}
+                  itemProps={{ columns: Columns }}
+                  itemSize={{ height: 40 }}
+                  itemAs={DetailsRow}
+                />
+              </>
             ) : (
               <Folders>
                 {Items.map(item => (
@@ -389,7 +396,7 @@ export const App = props => {
                 ))}
               </Folders>
             )}
-          </ItemView>
+          </Viewport>
         </AppFrame>
         {props.children}
       </>

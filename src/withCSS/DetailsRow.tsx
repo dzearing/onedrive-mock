@@ -11,16 +11,16 @@ export interface IDetailsRowProps extends IComponentProps {
 
 const DetailsRowCell = create("DetailsRowCell");
 
-export const DetailsRow = createPure<IDetailsRowProps>("DetailsRow", props => {
-  const { item, columns, ...p } = props;
+export const DetailsRow = createPure<IDetailsRowProps>("DetailsRow", p => {
+  const { item, columns, ...rest } = p;
 
   return (
-    <span {...p}>
+    <span {...rest}>
       <Check />
 
-      {props.columns.map(column => (
+      {columns.map(column => (
         <DetailsRowCell key={column.key} style={column.style}>
-          {props.item[column.key]}
+          {item[column.key]}
         </DetailsRowCell>
       ))}
     </span>

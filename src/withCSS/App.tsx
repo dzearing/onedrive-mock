@@ -5,9 +5,12 @@ import { create, createPure } from "./create";
 import { Button } from "./Button";
 import { Header } from "./Header";
 import { DetailsList } from "./DetailsList";
+import { DetailsHeader } from "./DetailsHeader";
 import { Items, Columns } from "../testData";
 import { CommandBar } from "./CommandBar";
-
+import { Viewport } from "../virtualizedList/Viewport";
+import { FixedList } from "../virtualizedList/FixedList";
+import { DetailsRow } from "./DetailsRow";
 import "./App.scss";
 
 const AppFrame = create("AppFrame");
@@ -19,7 +22,7 @@ const Breadcrumb = create("Breadcrumb");
 const Folders = create("Folders");
 const FolderButton = create("FolderButton", Button);
 
-const FolderImage = createPure('FolderImage', () => (
+const FolderImage = createPure("FolderImage", () => (
   <div style={{ position: "relative", alignSelf: "center" }}>
     <img src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_backplate.svg" />
     <img
@@ -32,7 +35,7 @@ const FolderImage = createPure('FolderImage', () => (
 const FolderTitle = createPure("FolderTitle");
 const FolderDate = createPure("FolderDate");
 
-const Folder = createPure('Folder', props => (
+const Folder = createPure("Folder", props => (
   <FolderButton>
     <FolderImage />
     <FolderTitle>{props.name}</FolderTitle>
@@ -71,11 +74,20 @@ export const App = props => {
           <SideNavButton>Recycle bin</SideNavButton>
         </SideNav>
 
-        <ItemView>
+        <Viewport as={ItemView}>
           <Breadcrumb>Files</Breadcrumb>
 
           {isListView ? (
-            <DetailsList items={Items} columns={Columns} />
+            <>
+              <DetailsHeader columns={Columns} />
+
+              <FixedList
+                items={Items}
+                itemAs={DetailsRow}
+                itemSize={{ height: 40 }}
+                itemProps={{ columns: Columns }}
+              />
+            </>
           ) : (
             <Folders>
               {Items.map(item => (
@@ -83,7 +95,7 @@ export const App = props => {
               ))}
             </Folders>
           )}
-        </ItemView>
+        </Viewport>
       </AppFrame>
       {props.children}
     </>
