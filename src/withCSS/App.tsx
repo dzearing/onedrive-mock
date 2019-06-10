@@ -11,6 +11,7 @@ import { CommandBar } from "./CommandBar";
 import { Viewport } from "../virtualizedList/Viewport";
 import { FixedList } from "../virtualizedList/FixedList";
 import { DetailsRow } from "./DetailsRow";
+
 import "./App.scss";
 
 const AppFrame = create("AppFrame");
@@ -74,7 +75,7 @@ export const App = props => {
           <SideNavButton>Recycle bin</SideNavButton>
         </SideNav>
 
-        <Viewport as={ItemView}>
+        <Viewport as={ItemView} style={{ padding: 20 }}>
           <Breadcrumb>Files</Breadcrumb>
 
           {isListView ? (
