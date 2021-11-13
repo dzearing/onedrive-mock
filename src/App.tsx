@@ -13,11 +13,11 @@ import { FixedList } from "./virtualizedList/FixedList";
 const { ThemeProvider, styled, StyleMethod } = StyleHelpers;
 
 const AppFrame = styled.div`
-  ${props => props.theme.default}
+  ${(props) => props.theme.default}
   ${Fonts.BodyFont}
   display: grid;
-  grid-template-rows: 50px 40px auto;
-  grid-template-columns: 207px auto;
+  grid-template-rows: 50px 44px auto;
+  grid-template-columns: 228px auto;
   grid-template-areas:
     "header header"
     "search commands"
@@ -27,7 +27,7 @@ const AppFrame = styled.div`
 `;
 AppFrame.displayName = "AppFrame";
 
-const flexGap = gap => `
+const flexGap = (gap) => `
 > * {
   margin-left: ${gap};
 }
@@ -64,8 +64,8 @@ const Button = styled.button`
 Button.displayName = "Button";
 
 const SquareButton = styled(Button)`
-  width: ${props => props.size || "50px"};
-  height: ${props => props.size || "50px"};
+  width: ${(props) => props.size || "50px"};
+  height: ${(props) => props.size || "50px"};
 `;
 
 SquareButton.displayName = "SquareButton";
@@ -75,7 +75,7 @@ const Header = styled("div", { displayName: "Header" })`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${props => props.theme.strong}
+  ${(props) => props.theme.strong}
 `;
 
 const ProductTitle = styled.h1`
@@ -98,7 +98,7 @@ const PersonaCoin = styled.div`
 `;
 
 const CommandBar = styled.div`
-  ${props => props.theme.neutral}
+  ${(props) => props.theme.default}
 
   grid-area: commands;
   display: flex;
@@ -106,8 +106,9 @@ const CommandBar = styled.div`
 `;
 
 const CommandButton = styled(Button)`
-  height: 40px;
+  height: 44px;
   padding: 0 12px;
+  background-color: transparent;
 
   & > [data-icon-name]:first-child {
     color: var(${ThemeVariables.IconColor});
@@ -116,11 +117,14 @@ const CommandButton = styled(Button)`
   ${flexGap("8px")}
 `;
 
-const Search = styled.div`
+const UserName = styled.div`
+  ${(props) => props.theme.neutral}
+  font-size: 14px;
+  font-weight: 600;
   grid-area: search;
   display: flex;
   align-items: center;
-  padding: 0 8px;
+  padding: 0 16px;
   border-bottom: 1px solid var(${ThemeVariables.BorderColor});
 
   & > * {
@@ -129,9 +133,10 @@ const Search = styled.div`
 `;
 
 const SideNav = styled.div`
+  ${(props) => props.theme.neutral}
   grid-area: nav;
   display: flex;
-  padding: 20px 0;
+  padding: 16px 0;
   border-right: 1px solid var(${ThemeVariables.BorderColor});
   flex-direction: column;
   align-items: stretch;
@@ -139,11 +144,23 @@ const SideNav = styled.div`
 `;
 
 const SideNavButton = styled(Button, { displayName: "SideNavButton" })`
+  display: flex;
+  gap: 12px;
   justify-content: start;
-  font-weight: 100;
-  font-size: 18px;
+  font-weight: ${(p) => (p.selected ? 600 : 400)};
+  font-size: 14px;
   padding: 0 16px;
   height: 36px;
+  background-color: ${(p) =>
+    p.selected ? `var(${ThemeVariables.BackgroundHoverColor})` : "transparent"};
+
+  :hover {
+    background-color: var(${ThemeVariables.BackgroundHoverColor});
+  }
+
+  :active {
+    background-color: var(${ThemeVariables.BackgroundPressedColor});
+  }
 `;
 
 const ItemView = styled.div`
@@ -162,9 +179,16 @@ const ItemView = styled.div`
   }
 `;
 
+const TitleArea = styled.div`
+  padding: 32px 32px 32px;
+`;
+
 const Breadcrumb = styled.div`
-  font-size: 28px;
-  font-weight: 100;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  line-height: 36px;
 `;
 
 const Folders = styled.div`
@@ -208,7 +232,7 @@ const FolderDate = styled.div`
   color: var(${ThemeVariables.SubTextColor});
 `;
 
-const Folder = props => (
+const Folder = (props) => (
   <FolderButton>
     <FolderImage />
     <FolderTitle>{props.name}</FolderTitle>
@@ -218,7 +242,7 @@ const Folder = props => (
 
 const DetailsList = styled.div``;
 
-const DetailsCheckButton = props => (
+const DetailsCheckButton = (props) => (
   <Button {...props} style={{ position: "relative", width: 40 }}>
     <Icon iconName="CircleRing" style={{ fontSize: 18 }} />
     <Icon
@@ -228,7 +252,7 @@ const DetailsCheckButton = props => (
         left: "50%",
         top: "50%",
         marginTop: -1.5,
-        transform: "translate(-50%, -50%)"
+        transform: "translate(-50%, -50%)",
       }}
       iconName="StatusCircleCheckmark"
     />
@@ -265,10 +289,10 @@ const DetailsHeaderButton = styled(Button)`
   font-size: ${FontSizes.small};
 `;
 
-const DetailsHeader = props => (
+const DetailsHeader = (props) => (
   <DetailsHeaderContainer>
     <DetailsCheckButton size="40px" style={{ flexShrink: 0 }} />
-    {Columns.map(column => (
+    {Columns.map((column) => (
       <DetailsHeaderCell
         {...column}
         as={column.canSort && DetailsHeaderButton}
@@ -292,22 +316,22 @@ const DetailsRowContainer = styled(DetailsHeaderContainer)`
 
 const DetailsRowCell = styled(DetailsHeaderCell)``;
 
-const DetailsRow = props => {
+const DetailsRow = (props) => {
   const { item, index, columns, ...rest } = props;
 
   return (
     <DetailsRowContainer {...rest}>
       <DetailsCheckButton as="span" size="40px" style={{ flexShrink: 0 }} />
-      {columns.map(column => (
+      {columns.map((column) => (
         <DetailsRowCell style={column.style}>{item[column.key]}</DetailsRowCell>
       ))}
     </DetailsRowContainer>
   );
 };
 
-const Persona = props => <PersonaCoin>DZ</PersonaCoin>;
+const Persona = (props) => <PersonaCoin>DZ</PersonaCoin>;
 
-export const App = props => {
+export const App = (props) => {
   const [isDark, setDark] = React.useState(false);
   const [isListView, setListView] = React.useState(true);
 
@@ -327,57 +351,76 @@ export const App = props => {
               <Persona />
             </SquareButton>
           </Header>
-          <Search>
-            <Icon iconName="search" />
-            <span>Search everything</span>
-          </Search>
 
-          <CommandBar>
-            <div style={{ display: "flex", flexGrow: 1 }}>
+          <UserName>David Zearing</UserName>
+
+          <div
+            style={{ background: "white", borderBottom: "1px solid #edebe9" }}
+          >
+            <CommandBar>
+              <div style={{ display: "flex", flexGrow: 1 }}>
+                <CommandButton>
+                  <Icon iconName="add" style={{ fontSize: 16 }} />
+                  <span>New</span>
+                  <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+                </CommandButton>
+                <CommandButton>
+                  <Icon iconName="upload" style={{ fontSize: 16 }} />
+                  <span>Upload</span>
+                  <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+                </CommandButton>
+                <CommandButton onClick={() => setDark(!isDark)}>
+                  <Icon iconName="brush" style={{ fontSize: 16 }} />
+                  <span>{isDark ? "Light mode" : "Dark mode"}</span>
+                </CommandButton>
+              </div>
+
               <CommandButton>
-                <Icon iconName="add" style={{ fontSize: 16 }} />
-                <span>New</span>
+                <Icon iconName="sortlines" style={{ fontSize: 16 }} />
+                <span>Sort</span>
                 <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
               </CommandButton>
+
+              <CommandButton onClick={() => setListView(!isListView)}>
+                <Icon
+                  iconName={isListView ? "list" : "viewall"}
+                  style={{ fontSize: 16 }}
+                />
+              </CommandButton>
+
               <CommandButton>
-                <Icon iconName="upload" style={{ fontSize: 16 }} />
-                <span>Upload</span>
-                <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+                <Icon iconName="info" style={{ fontSize: 16 }} />
               </CommandButton>
-              <CommandButton onClick={() => setDark(!isDark)}>
-                <Icon iconName="brush" style={{ fontSize: 16 }} />
-                <span>{isDark ? "Light mode" : "Dark mode"}</span>
-              </CommandButton>
-            </div>
-
-            <CommandButton>
-              <Icon iconName="sortlines" style={{ fontSize: 16 }} />
-              <span>Sort</span>
-              <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
-            </CommandButton>
-
-            <CommandButton onClick={() => setListView(!isListView)}>
-              <Icon
-                iconName={isListView ? "list" : "viewall"}
-                style={{ fontSize: 16 }}
-              />
-            </CommandButton>
-
-            <CommandButton>
-              <Icon iconName="info" style={{ fontSize: 16 }} />
-            </CommandButton>
-          </CommandBar>
+            </CommandBar>
+          </div>
 
           <SideNav>
-            <SideNavButton>Files</SideNavButton>
-            <SideNavButton>Recent</SideNavButton>
-            <SideNavButton>Photos</SideNavButton>
-            <SideNavButton>Shared</SideNavButton>
-            <SideNavButton>Recycle bin</SideNavButton>
+            <SideNavButton selected>
+              <Icon iconName="FabricFolder" style={{ fontSize: 16 }} />
+              <span>My files</span>
+            </SideNavButton>
+            <SideNavButton>
+              <Icon iconName="History" style={{ fontSize: 16 }} />
+              <span>Recent</span>
+            </SideNavButton>
+            <SideNavButton>
+              <Icon iconName="Photo2" style={{ fontSize: 16 }} />
+              <span>Photos</span>
+            </SideNavButton>
+            <SideNavButton>
+              <Icon iconName="People" style={{ fontSize: 16 }} />
+              <span>Shared</span>
+            </SideNavButton>
+            <SideNavButton>
+              <Icon iconName="RecycleBin" style={{ fontSize: 16 }} />
+              <span>Recycle</span>
+            </SideNavButton>
           </SideNav>
 
           <Viewport as={ItemView}>
-            <Breadcrumb>Files</Breadcrumb>
+            <TitleArea>
+              <Breadcrumb>My files</Breadcrumb>
+            </TitleArea>
 
             {isListView ? (
               <>
@@ -391,7 +434,7 @@ export const App = props => {
               </>
             ) : (
               <Folders>
-                {Items.map(item => (
+                {Items.map((item) => (
                   <Folder key={item.name} {...item} />
                 ))}
               </Folders>
