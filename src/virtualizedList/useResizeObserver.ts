@@ -1,10 +1,10 @@
 import * as React from "react";
 
-export const useResizeObserver = ref => {
+export const useResizeObserver = (ref) => {
   const [clientRect, setClientRect] = React.useState(undefined);
 
-  const resizeCallback = React.useCallback(entries => {
-    console.log("measure");
+  const resizeCallback = React.useCallback((entries) => {
+    // console.log("measure");
     setClientRect(entries[0].target.getBoundingClientRect());
   }, []);
 

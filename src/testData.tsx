@@ -3,6 +3,7 @@ import { Icon } from "./Icon";
 
 export const FolderIcon = () => (
   <img
+    alt=""
     src="https://az742526.vo.msecnd.net/files/odsp-next-release-odc_2019-03-15_20190322.001/odsp-media/images/itemtypes/20/folder.svg"
     style={{ width: 20, height: 20 }}
   />
@@ -16,16 +17,16 @@ export const Columns = [
       maxWidth: 32,
       justifyContent: "center",
       alignItems: "center",
-      textAlign: "center"
+      textAlign: "center",
     } as React.CSSProperties,
-    children: <Icon iconName="Page" />
+    children: <Icon iconName="Page" />,
   },
   {
     key: "nameRow",
     style: {
       flexGrow: 1,
       minWidth: 150,
-      maxWidth: 400
+      maxWidth: 400,
     },
     canSort: true,
     children: (
@@ -34,13 +35,13 @@ export const Columns = [
         <Icon iconName="SortUp" />
         <Icon iconName="ChevronDown" />
       </>
-    )
+    ),
   },
   {
     key: "modified",
     style: {
       minWidth: 120,
-      maxWidth: 180
+      maxWidth: 180,
     },
     canSort: true,
     children: (
@@ -48,13 +49,13 @@ export const Columns = [
         <span>Modified</span>
         <Icon iconName="ChevronDown" />
       </>
-    )
+    ),
   },
   {
     key: "sharing",
     style: {
       minWidth: 120,
-      maxWidth: 180
+      maxWidth: 180,
     },
     canSort: true,
     children: (
@@ -62,13 +63,13 @@ export const Columns = [
         <span>Sharing</span>
         <Icon iconName="ChevronDown" />
       </>
-    )
+    ),
   },
   {
     key: "size",
     style: {
       minWidth: 120,
-      maxWidth: 180
+      maxWidth: 180,
     },
     canSort: true,
     children: (
@@ -76,11 +77,11 @@ export const Columns = [
         <span>Size</span>
         <Icon iconName="ChevronDown" />
       </>
-    )
-  }
+    ),
+  },
 ];
 export const Items = Array.from({ length: 1000 }).map((item, index) => ({
-  key: `${index}`,
+  key: `item-${index}`,
   type: <FolderIcon />,
   name: `Item ${index}`,
   nameRow: (
@@ -92,5 +93,5 @@ export const Items = Array.from({ length: 1000 }).map((item, index) => ({
   ),
   modified: "Jan 26, 2017",
   sharing: "Sharing",
-  size: `${Math.round(Math.random() * 100)} KB`
+  size: `${Math.round(Math.random() * 100)} KB`,
 }));

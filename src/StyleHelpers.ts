@@ -1,16 +1,16 @@
 import { styled as msStyled } from "./newStyled/styled";
 import { ThemeProvider as msThemeProvider } from "./newStyled/ThemeProvider";
 import { default as emStyled } from "@emotion/styled";
-import { ThemeProvider as emThemeProvider } from "emotion-theming";
+import { ThemeProvider as emThemeProvider } from "@emotion/react";
 import {
   default as scStyled,
-  ThemeProvider as scThemeProvider
+  ThemeProvider as scThemeProvider,
 } from "styled-components";
 
 export let StyleHelpers = {
   StyleMethod: "merge-styles 2 proto",
   styled: msStyled,
-  ThemeProvider: msThemeProvider
+  ThemeProvider: msThemeProvider,
 };
 
 switch (document.location.search) {
@@ -18,14 +18,14 @@ switch (document.location.search) {
     StyleHelpers = {
       StyleMethod: "emotion",
       styled: emStyled,
-      ThemeProvider: emThemeProvider
+      ThemeProvider: emThemeProvider,
     };
     break;
   case "?styled-components":
     StyleHelpers = {
       StyleMethod: "styled-components",
       styled: scStyled,
-      ThemeProvider: scThemeProvider as any
+      ThemeProvider: scThemeProvider as any,
     };
     break;
 }

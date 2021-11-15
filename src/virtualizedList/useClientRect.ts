@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const useClientRect = ref => {
+export const useClientRect = (ref) => {
   const [state] = React.useState({ isMeasuring: false, rafHandle: 0 });
   const [clientRect, setClientRect] = React.useState(undefined);
 
@@ -14,6 +14,7 @@ export const useClientRect = ref => {
 
       return () => cancelAnimationFrame(state.rafHandle);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref.current]);
 
   return clientRect;

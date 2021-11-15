@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createPure, create, IComponentProps } from "./create";
+import { createPure, IComponentProps } from "./create";
 import { Button } from "./Button";
 import cx from "classnames";
 import { Icon } from "../Icon";
@@ -18,7 +18,7 @@ const IconLargeSize = { fontSize: 16 };
 
 const CommandButton = createPure<ICommandButtonProps>(
   "CommandButton",
-  props => {
+  (props) => {
     const { as: C = Button, iconName, text, isMenu, ...p } = props;
 
     return (
@@ -38,40 +38,46 @@ export interface ICommandBarProps extends IComponentProps {
   setListView: (val: boolean) => void;
 }
 
-export const CommandBar = createPure<ICommandBarProps>("CommandBar", props => {
-  const {
-    as: C = "div",
-    className,
-    isDark,
-    setDark,
-    isListView,
-    setListView,
-    ...p
-  } = props;
+export const CommandBar = createPure<ICommandBarProps>(
+  "CommandBar",
+  (props) => {
+    const {
+      as: C = "div",
+      className,
+      isDark,
+      setDark,
+      isListView,
+      setListView,
+      ...p
+    } = props;
 
-  const onThemeClick = React.useCallback(() => setDark(!isDark), [isDark]);
-  const onViewClick = React.useCallback(() => setListView(!isListView), [
-    isListView
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const onThemeClick = React.useCallback(() => setDark(!isDark), [isDark]);
+    const onViewClick = React.useCallback(
+      () => setListView(!isListView),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [isListView]
+    );
 
-  return (
-    <C {...p} className={cx(className, "ms-scheme-neutral")}>
-      <div style={{ display: "flex", flexGrow: 1 }}>
-        <CommandButton iconName="add" text="New" isMenu />
-        <CommandButton iconName="upload" text="Upload" isMenu />
+    return (
+      <C {...p} className={cx(className, "ms-scheme-neutral")}>
+        <div style={{ display: "flex", flexGrow: 1 }}>
+          <CommandButton iconName="add" text="New" isMenu />
+          <CommandButton iconName="upload" text="Upload" isMenu />
+          <CommandButton
+            iconName="brush"
+            text={isDark ? "Light mode" : "Dark mode"}
+            onClick={onThemeClick}
+          />
+        </div>
+
+        <CommandButton iconName="sortlines" text="Sort" isMenu />
         <CommandButton
-          iconName="brush"
-          text={isDark ? "Light mode" : "Dark mode"}
-          onClick={onThemeClick}
+          iconName={isListView ? "list" : "viewall"}
+          onClick={onViewClick}
         />
-      </div>
-
-      <CommandButton iconName="sortlines" text="Sort" isMenu />
-      <CommandButton
-        iconName={isListView ? "list" : "viewall"}
-        onClick={onViewClick}
-      />
-      <CommandButton iconName="info" />
-    </C>
-  );
-});
+        <CommandButton iconName="info" />
+      </C>
+    );
+  }
+);

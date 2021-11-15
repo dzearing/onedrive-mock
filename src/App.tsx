@@ -5,7 +5,7 @@ import { Icon } from "./Icon";
 import * as ThemeVariables from "./themeVariables";
 import * as Fonts from "./fonts";
 import { NoWrapStyle } from "./commonStyles";
-import { FontSizes } from "@uifabric/styling";
+import { FontSizes } from "@fluentui/react";
 import { Items, Columns } from "./testData";
 import { Viewport } from "./virtualizedList/Viewport";
 import { FixedList } from "./virtualizedList/FixedList";
@@ -213,8 +213,12 @@ const FolderButton = styled(Button)`
 
 const FolderImage = () => (
   <div style={{ position: "relative", alignSelf: "center" }}>
-    <img src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_backplate.svg" />
     <img
+      alt=""
+      src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_backplate.svg"
+    />
+    <img
+      alt=""
       style={{ position: "absolute", left: 0, top: 0 }}
       src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_frontplate_thumbnail.svg"
     />
@@ -239,8 +243,6 @@ const Folder = (props) => (
     <FolderDate>{props.date}</FolderDate>
   </FolderButton>
 );
-
-const DetailsList = styled.div``;
 
 const DetailsCheckButton = (props) => (
   <Button {...props} style={{ position: "relative", width: 40 }}>
@@ -322,8 +324,10 @@ const DetailsRow = (props) => {
   return (
     <DetailsRowContainer {...rest}>
       <DetailsCheckButton as="span" size="40px" style={{ flexShrink: 0 }} />
-      {columns.map((column) => (
-        <DetailsRowCell style={column.style}>{item[column.key]}</DetailsRowCell>
+      {columns.map((column, i) => (
+        <DetailsRowCell key={i} style={column.style}>
+          {item[column.key]}
+        </DetailsRowCell>
       ))}
     </DetailsRowContainer>
   );
@@ -441,7 +445,6 @@ export const App = (props) => {
             )}
           </Viewport>
         </AppFrame>
-        {props.children}
       </>
     </ThemeProvider>
   );

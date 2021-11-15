@@ -1,5 +1,4 @@
-import * as React from "react";
-import { createPure, create, IComponentProps } from "./create";
+import { createPure, IComponentProps } from "./create";
 import { Icon } from "../Icon";
 
 import "./Check.scss";
@@ -9,14 +8,14 @@ export interface ICheckProps extends IComponentProps {
 }
 
 const CheckCircleIcon = createPure("CheckCircleIcon", Icon, {
-  iconName: "CircleRing"
+  iconName: "CircleRing",
 });
 
 const CheckIcon = createPure("CheckIcon", Icon, {
-  iconName: "StatusCircleCheckmark"
+  iconName: "StatusCircleCheckmark",
 });
 
-export const Check = createPure<ICheckProps>("Check", props => {
+export const Check = createPure<ICheckProps>("Check", (props) => {
   const { on, as: C = "div", ...p } = props;
 
   return (

@@ -4,7 +4,6 @@ import cx from "classnames";
 import { create, createPure } from "./create";
 import { Button } from "./Button";
 import { Header } from "./Header";
-import { DetailsList } from "./DetailsList";
 import { DetailsHeader } from "./DetailsHeader";
 import { Items, Columns } from "../testData";
 import { CommandBar } from "./CommandBar";
@@ -25,8 +24,12 @@ const FolderButton = create("FolderButton", Button);
 
 const FolderImage = createPure("FolderImage", () => (
   <div style={{ position: "relative", alignSelf: "center" }}>
-    <img src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_backplate.svg" />
     <img
+      alt=""
+      src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_backplate.svg"
+    />
+    <img
+      alt=""
       style={{ position: "absolute", left: 0, top: 0 }}
       src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/foldericons/folder-small_frontplate_thumbnail.svg"
     />
@@ -36,7 +39,7 @@ const FolderImage = createPure("FolderImage", () => (
 const FolderTitle = createPure("FolderTitle");
 const FolderDate = createPure("FolderDate");
 
-const Folder = createPure("Folder", props => (
+const Folder = createPure("Folder", (props) => (
   <FolderButton>
     <FolderImage />
     <FolderTitle>{props.name}</FolderTitle>
@@ -44,7 +47,7 @@ const Folder = createPure("Folder", props => (
   </FolderButton>
 ));
 
-export const App = props => {
+export const App = (props) => {
   const [isDark, setDark] = React.useState(false);
   const [isListView, setListView] = React.useState(true);
 
@@ -91,7 +94,7 @@ export const App = props => {
             </>
           ) : (
             <Folders>
-              {Items.map(item => (
+              {Items.map((item) => (
                 <Folder key={item.name} {...item} />
               ))}
             </Folders>

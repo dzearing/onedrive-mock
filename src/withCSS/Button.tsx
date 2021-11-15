@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createPure } from "./create";
 import "./Button.scss";
 

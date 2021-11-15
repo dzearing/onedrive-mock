@@ -15,20 +15,20 @@ export const styled: any = (
   Component: ComponentType,
   options: { displayName?: string; state?: Function } = {}
 ) => {
-  return function() {
+  return function () {
     const styles = arguments;
     const parentStyles = Component.__styles;
     const argCache = new Map();
 
     Component = Component.__component || Component;
 
-    const result = allProps => {
+    const result = function InnerComponent(allProps) {
       const { as, className, ...props } = allProps;
       const Resolved = as || Component;
       const theme = React.useContext(ThemeContext);
       const viewProps = {
         ...(options.state ? options.state(props) : props),
-        theme
+        theme,
       };
 
       viewProps.className = resolveClass(
@@ -38,11 +38,25 @@ export const styled: any = (
         styles
       );
 
-      if (className) {
-        viewProps.className += " " + className;
-      }
+      // if (className) {
+      //   viewProps.className += " " + className;
+      // }
 
       delete viewProps.theme;
+
+      const prev = React.useRef(viewProps);
+      React.useEffect(() => {
+        const changedProps = Object.entries(viewProps).reduce((ps, [k, v]) => {
+          if (prev.current[k] !== v) {
+            ps[k] = [prev.current[k], v];
+          }
+          return ps;
+        }, {});
+        if (Object.keys(changedProps).length > 0) {
+          console.log("Changed props:", changedProps);
+        }
+        prev.current = props;
+      });
 
       return <Resolved {...viewProps} />;
     };
@@ -115,8 +129,4 @@ function _scrub(input) {
   }
 }
 
-const createFactory = type => {
-  (styled as any)[type] = styled(type);
-};
-
-ElementTypes.forEach(type => (styled[type] = styled(type)));
+ElementTypes.forEach((type) => (styled[type] = styled(type)));

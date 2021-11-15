@@ -21,9 +21,10 @@ const getVisibleRanges = ({ items, itemSize, viewport, surfaceRect }) => {
 
     // console.log(`${start}-${end}`);
     return [{ start, end }];
-  } else {
-    console.log("woops no visible stuff", viewport.viewportRect, surfaceRect);
   }
+  //  else {
+  //   console.log("woops no visible stuff", viewport.viewportRect, surfaceRect);
+  // }
 
   return [
     {
@@ -31,12 +32,12 @@ const getVisibleRanges = ({ items, itemSize, viewport, surfaceRect }) => {
       end: Math.min(
         items.length,
         Math.ceil(window.outerHeight / itemSize.height)
-      )
-    }
+      ),
+    },
   ];
 };
 
-export const FixedList = props => {
+export const FixedList = (props) => {
   const {
     as: C = "div",
     items = [],
@@ -57,13 +58,13 @@ export const FixedList = props => {
     items,
     itemSize,
     viewport,
-    surfaceRect
+    surfaceRect,
   });
 
   const ListStyle = {
     position: "relative",
     height: `${items.length * itemSize.height}px`,
-    ...style
+    ...style,
   };
 
   for (const range of visibleRanges) {
@@ -75,7 +76,7 @@ export const FixedList = props => {
         width: "100%",
         height: `${itemSize.height}px`,
         //transform: `translate(0, ${i * itemSize.height}px)`
-        top: i * itemSize.height
+        top: i * itemSize.height,
       });
 
       const calculatedProps = {
@@ -83,7 +84,7 @@ export const FixedList = props => {
         index: i,
         item,
         style,
-        key: item.key
+        key: item.key,
       };
 
       children.push(<Item {...calculatedProps} />);

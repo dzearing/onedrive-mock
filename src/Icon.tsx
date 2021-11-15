@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getIcon } from "office-ui-fabric-react";
+import { getIcon } from "@fluentui/react";
 import cx from "classnames";
 import { IComponentProps } from "./withCSS/create";
 
@@ -7,7 +7,7 @@ export interface IIconProps extends IComponentProps {
   iconName: string;
 }
 
-export const Icon = React.memo<IIconProps>(props => {
+export const Icon = React.memo<IIconProps>((props) => {
   const { iconName, ...p } = props;
   const icon = getIcon(iconName);
 
