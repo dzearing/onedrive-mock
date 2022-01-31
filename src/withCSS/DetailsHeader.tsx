@@ -3,7 +3,7 @@ import { createPure, create, IComponentProps } from "./create";
 import { Check } from "./Check";
 import { Button } from "./Button";
 
-import "./DetailsHeader.scss";
+import "./DetailsHeader.global.scss";
 
 const DetailsHeaderCell = createPure("DetailsHeaderCell");
 const DetailsHeaderButton = createPure("DetailsHeaderButton", Button);

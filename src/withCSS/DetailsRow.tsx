@@ -2,7 +2,7 @@ import * as React from "react";
 import { createPure, create, IComponentProps } from "./create";
 import { Check } from "./Check";
 
-import "./DetailsRow.scss";
+import "./DetailsRow.global.scss";
 
 export interface IDetailsRowProps extends IComponentProps {
   columns: any[];
