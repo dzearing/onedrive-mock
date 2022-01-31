@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createPure } from "./create";
 
-import "./Persona.scss";
+import "./Persona.global.scss";
 
 const PersonaCoin = createPure("PersonaCoin");
 

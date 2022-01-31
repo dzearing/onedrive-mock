@@ -11,7 +11,7 @@ import { Viewport } from "../virtualizedList/Viewport";
 import { FixedList } from "../virtualizedList/FixedList";
 import { DetailsRow } from "./DetailsRow";
 
-import "./App.scss";
+import "./App.global.scss";
 
 const AppFrame = create("AppFrame");
 const Search = create("Search");

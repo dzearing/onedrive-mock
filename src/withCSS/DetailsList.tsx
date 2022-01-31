@@ -7,7 +7,7 @@ import { Check } from "./Check";
 import { DetailsRow } from "./DetailsRow";
 import { DetailsHeader } from "./DetailsHeader";
 
-import "./DetailsList.scss";
+import "./DetailsList.global.scss";
 
 export interface IDetailsListProps extends IComponentProps {
   items: any[];
