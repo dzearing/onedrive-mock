@@ -7,7 +7,8 @@ import "./reset.css";
 
 initializeIcons();
 
-const rootElement = document.getElementById("root");
+const rootElement = document.createElement("div");
+document.body.appendChild(rootElement);
 let RenderedApp = App;
 
 if (document.location.search === "?css") {
