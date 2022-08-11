@@ -5,7 +5,9 @@ import { Icon } from "./Icon";
 import * as ThemeVariables from "./themeVariables";
 import * as Fonts from "./fonts";
 import { NoWrapStyle } from "./commonStyles";
-import { FontSizes } from "@fluentui/react";
+import { FontSizes } from "@fluentui/react/lib/Styling";
+import { PrimaryButton } from "@fluentui/react/lib/Button";
+import { Toggle } from "@fluentui/react/lib/Toggle";
 import { Items, Columns } from "./testData";
 import { Viewport } from "./virtualizedList/Viewport";
 import { FixedList } from "./virtualizedList/FixedList";
@@ -271,22 +273,21 @@ const DetailsHeaderContainer = styled.div`
 
 const DetailsHeaderCell = styled.div`
   display: flex;
+  gap: 4px;
   justify-content: start;
-  font-size: ${FontSizes.small};
+  font-size: ${FontSizes.medium};
+
   flex-grow: 1;
   box-sizing: border-box;
   padding: 0 8px;
 
-  & > * {
-    margin-left: 4px;
-  }
-  & > *:first-child {
-    margin-left: 0;
-  }
   ${NoWrapStyle}
 `;
 
 const DetailsHeaderButton = styled(Button)`
+  display: flex;
+  flex-grow: 1;
+  gap: 4px;
   justify-content: start;
   font-size: ${FontSizes.small};
 `;
@@ -294,10 +295,10 @@ const DetailsHeaderButton = styled(Button)`
 const DetailsHeader = (props) => (
   <DetailsHeaderContainer>
     <DetailsCheckButton size="40px" style={{ flexShrink: 0 }} />
-    {Columns.map((column) => (
+    {Columns.map(({canSort, ...column}) => (
       <DetailsHeaderCell
         {...column}
-        as={column.canSort && DetailsHeaderButton}
+        as={canSort && DetailsHeaderButton}
       />
     ))}
   </DetailsHeaderContainer>
@@ -316,7 +317,9 @@ const DetailsRowContainer = styled(DetailsHeaderContainer)`
   }
 `;
 
-const DetailsRowCell = styled(DetailsHeaderCell)``;
+const DetailsRowCell = styled(DetailsHeaderCell)`
+  font-weight: normal;
+`;
 
 const DetailsRow = (props) => {
   const { item, index, columns, ...rest } = props;
@@ -352,7 +355,7 @@ export const App = (props) => {
               <Icon iconName="help" style={{ fontSize: 16 }} />
             </SquareButton>
             <SquareButton>
-              <Persona />
+              <Persona/>
             </SquareButton>
           </Header>
 
@@ -366,12 +369,12 @@ export const App = (props) => {
                 <CommandButton>
                   <Icon iconName="add" style={{ fontSize: 16 }} />
                   <span>New</span>
-                  <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+                  <Icon iconName="chevrondownsmall" style={{ fontSize: 8 }} />
                 </CommandButton>
                 <CommandButton>
                   <Icon iconName="upload" style={{ fontSize: 16 }} />
                   <span>Upload</span>
-                  <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+                  <Icon iconName="chevrondownsmall" style={{ fontSize: 8 }} />
                 </CommandButton>
                 <CommandButton onClick={() => setDark(!isDark)}>
                   <Icon iconName="brush" style={{ fontSize: 16 }} />
@@ -381,8 +384,8 @@ export const App = (props) => {
 
               <CommandButton>
                 <Icon iconName="sortlines" style={{ fontSize: 16 }} />
-                <span>Sort</span>
-                <Icon iconName="chevrondown" style={{ fontSize: 12 }} />
+                <span>Sort by</span>
+                <Icon iconName="chevrondownsmall" style={{ fontSize: 8 }} />
               </CommandButton>
 
               <CommandButton onClick={() => setListView(!isListView)}>
@@ -391,7 +394,6 @@ export const App = (props) => {
                   style={{ fontSize: 16 }}
                 />
               </CommandButton>
-
               <CommandButton>
                 <Icon iconName="info" style={{ fontSize: 16 }} />
               </CommandButton>

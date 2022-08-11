@@ -3,8 +3,8 @@ import { useResizeObserver } from "./useResizeObserver";
 
 export const ViewportContext = React.createContext({});
 
-export const Viewport = props => {
-  const { style, ...rest } = props;
+export const Viewport = (props) => {
+  const { style, as, ...rest } = props;
   const viewportRef = React.useRef(undefined);
 
   //const viewportRect = useClientRect(viewportRef);
@@ -15,7 +15,8 @@ export const Viewport = props => {
   const viewportStyle = {
     overflow: "scroll",
     outline: "none",
-    ...style
+    padding: "0 16px",
+    ...style,
   };
   const onScroll = React.useCallback(
     (ev: React.UIEvent<HTMLDivElement>) => {
@@ -25,7 +26,7 @@ export const Viewport = props => {
         viewportRect,
         clientTop,
         scrollTop,
-        scrollBottom: scrollTop + clientHeight
+        scrollBottom: scrollTop + clientHeight,
       });
     },
     [viewportRect]

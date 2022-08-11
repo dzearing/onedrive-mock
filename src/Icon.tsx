@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getIcon } from "@fluentui/react";
+import { getIcon } from "@fluentui/react/lib/Styling";
 import cx from "classnames";
 import { IComponentProps } from "./withCSS/create";
 

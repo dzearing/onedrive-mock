@@ -1,0 +1,15 @@
+{
+  "outPath": "dist",
+  "resourceRoots": [],
+  "watchSourceRoots": ["."],
+  "directServeDirectories": [],
+  "defineConstants": {
+      "global": "self",
+      "process.env.IS_WEBPACK": "false"
+  },
+  "entry": {
+      "index": "onedrive-mock"
+  },
+  "workerRawEntries": {},
+  "entryGroups": {}
+}
