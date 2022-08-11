@@ -15,10 +15,11 @@ export const create = <TProps extends IComponentProps = IComponentProps>(
   defaultProps: TProps = {} as TProps
 ): React.FC<TProps & IComponentProps> => {
   const component = (p: IComponentProps) => {
-    const { as: C = Base, ...props } = p;
-
+    const { as: asValue = Base, ...props } = p;
+    const Comp = asValue as React.FC<TProps & IComponentProps>;
+    
     return (
-      <C
+      <Comp
         {...defaultProps}
         {...props}
         className={cx("ms-" + name, p.className, defaultProps.className)}

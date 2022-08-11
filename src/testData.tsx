@@ -33,7 +33,7 @@ export const Columns = [
       <>
         <span>Name</span>
         <Icon iconName="SortUp" />
-        <Icon iconName="ChevronDown" />
+        <Icon iconName="ChevronDownSmall" style={{ fontSize: 8 }} />
       </>
     ),
   },
@@ -47,7 +47,7 @@ export const Columns = [
     children: (
       <>
         <span>Modified</span>
-        <Icon iconName="ChevronDown" />
+        <Icon iconName="ChevronDownSmall" style={{ fontSize: 8 }} />
       </>
     ),
   },
@@ -61,7 +61,7 @@ export const Columns = [
     children: (
       <>
         <span>Sharing</span>
-        <Icon iconName="ChevronDown" />
+        <Icon iconName="ChevronDownSmall" style={{ fontSize: 8 }} />
       </>
     ),
   },
@@ -75,20 +75,18 @@ export const Columns = [
     children: (
       <>
         <span>Size</span>
-        <Icon iconName="ChevronDown" />
+        <Icon iconName="ChevronDownSmall" style={{ fontSize: 8 }} />
       </>
     ),
   },
 ];
 export const Items = Array.from({ length: 1000 }).map((item, index) => ({
-  key: `item-${index}`,
+  key: `item${index}`,
   type: <FolderIcon />,
   name: `Item ${index}`,
   nameRow: (
     <>
       <span style={{ fontSize: 14 }}>{`Item ${index}`} </span>
-      <Icon iconName="Share" />
-      <Icon iconName="MoreVertical" />
     </>
   ),
   modified: "Jan 26, 2017",

@@ -1,39 +1,42 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { App } from "./App";
-import { App as AppWithCSS } from "./withCSS/App";
-import { initializeIcons } from "@fluentui/react";
-import "./reset.css";
+// import { App as AppWithCSS } from "./withCSS/App";
+import { initializeIcons } from "@fluentui/react/lib/Icons";
+import "./reset.global.css";
 
-initializeIcons();
+window.addEventListener('load', () => {
+  initializeIcons();
 
-const rootElement = document.createElement("div");
-document.body.appendChild(rootElement);
-let RenderedApp = App;
+  const rootElement = document.createElement('div');
+  document.body.appendChild(rootElement);
 
-if (document.location.search === "?css") {
-  RenderedApp = AppWithCSS;
-}
+  let RenderedApp = App;
 
-performance.mark("start");
-render(<RenderedApp />, rootElement);
-performance.mark("end");
-performance.measure("render", "start", "end");
+  // if (document.location.search === "?css") {
+  //   RenderedApp = AppWithCSS;
+  // }
 
-// const options = {
-//   content: <App />,
-//   element: rootElement,
-//   instances: 1,
-//   iterations: 1
-// };
+  performance.mark("start");
+  render(<RenderedApp />, rootElement);
+  performance.mark("end");
+  performance.measure("render", "start", "end");
 
-// measureRender(options).then(timings =>
-//   render(
-//     <>
-//       <App>
-//         <Timing timings={timings} options={options} />
-//       </App>
-//     </>,
-//     rootElement
-//   )
-// );
+  // const options = {
+  //   content: <App />,
+  //   element: rootElement,
+  //   instances: 1,
+  //   iterations: 1
+  // };
+
+  // measureRender(options).then(timings =>
+  //   render(
+  //     <>
+  //       <App>
+  //         <Timing timings={timings} options={options} />
+  //       </App>
+  //     </>,
+  //     rootElement
+  //   )
+  // );
+});

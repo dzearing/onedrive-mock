@@ -1,1 +1,6 @@
 node_modules
+build
+lib
+ori-*.json
+resolve-map.json
+import-map.json

@@ -1,0 +1,18 @@
+{
+  "oripackPort": 8080,
+  "absWorkingDir": "C:\\git\\onedrive-mock",
+  "outbase": "src",
+  "outdir": "C:\\git\\onedrive-mock\\oriout\\lib",
+  "entryPoints": {
+    "index": "./src/index.tsx"
+  },
+  "external": [],
+  "splitting": true,
+  "metafile": true,
+  "define": {
+    "global": "window",
+    "DEPRECATED_UNIT_TEST": "true",
+    "process.env.NODE_ENV": "\"production\""
+  },
+  "minify": true
+}
