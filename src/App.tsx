@@ -6,8 +6,6 @@ import * as ThemeVariables from "./themeVariables";
 import * as Fonts from "./fonts";
 import { NoWrapStyle } from "./commonStyles";
 import { FontSizes } from "@fluentui/react/lib/Styling";
-import { PrimaryButton } from "@fluentui/react/lib/Button";
-import { Toggle } from "@fluentui/react/lib/Toggle";
 import { Items, Columns } from "./testData";
 import { Viewport } from "./virtualizedList/Viewport";
 import { FixedList } from "./virtualizedList/FixedList";

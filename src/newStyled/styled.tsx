@@ -46,12 +46,6 @@ export const styled: any = (
 
       const prev = React.useRef(viewProps);
       React.useEffect(() => {
-        const changedProps = Object.entries(viewProps).reduce((ps, [k, v]) => {
-          if (prev.current[k] !== v) {
-            ps[k] = [prev.current[k], v];
-          }
-          return ps;
-        }, {});
         prev.current = props;
       });
 
