@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { Icon } from "../Icon";
 import { Persona } from "./Persona";
 
-import "./Header.scss";
+import "./Header.global.scss";
 
 const SquareButton = create("SquareButton", Button);
 const WaffleIcon = createPure<{}>("WaffleIcon", Icon, {

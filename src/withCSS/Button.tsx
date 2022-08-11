@@ -1,4 +1,4 @@
 import { createPure } from "./create";
-import "./Button.scss";
+import "./Button.global.scss";
 
 export const Button = createPure("Button", "button");

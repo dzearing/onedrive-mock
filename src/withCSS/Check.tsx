@@ -1,7 +1,7 @@
 import { createPure, IComponentProps } from "./create";
 import { Icon } from "../Icon";
 
-import "./Check.scss";
+import "./Check.global.scss";
 
 export interface ICheckProps extends IComponentProps {
   on?: boolean;

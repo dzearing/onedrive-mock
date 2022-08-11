@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import cx from "classnames";
 import { Icon } from "../Icon";
 
-import "./CommandBar.scss";
+import "./CommandBar.global.scss";
 
 interface ICommandButtonProps extends IComponentProps {
   iconName: string;
