@@ -28,7 +28,8 @@
     "sass": "^1.49.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-webpack": "react-scripts start",
+    "start-cloudpack": "node ../cloudpack/packages/cli/lib/cloudpack.js start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
